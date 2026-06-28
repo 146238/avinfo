@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviation Terms Glossary</title>
+    
+    <script>
+        const definitions = {
+            // Airspeed & Altitude
+            "IAS": "Indicated Airspeed – The speed shown directly on the aircraft's airspeed indicator.",
+            "CAS": "Calibrated Airspeed – Indicated airspeed corrected for instrument and positioning installation errors.",
+            "EAS": "Equivalent Airspeed – Calibrated airspeed corrected for the compressibility of air at high speeds.",
+            "TAS": "True Airspeed – The actual speed of the aircraft relative to the airmass through which it flies.",
+            "GS": "Ground Speed – The actual speed of the aircraft relative to the ground (TAS adjusted for headwind or tailwind).",
+            "Mach Number": "The ratio of the aircraft's true airspeed to the local speed of sound.",
+            "Pressure Altitude": "The altitude indicated when the altimeter barometric scale is set to standard 29.92 inHg or 1013.25 hPa.",
+            "True Altitude": "The actual vertical distance of the aircraft above mean sea level (MSL).",
+            "AGL": "Above Ground Level – The altitude measured directly above the terrain below.",
+            "MSL": "Mean Sea Level – The standard aviation altitude reference measured from average sea levels.",
+            "Flight Envelope": "The maximum safe limits of speed, altitude, and structural loading an aircraft can handle.",
+            "Coffin Corner": "A high-altitude region where the aircraft's stall speed approaches its critical Mach number, leaving no room for speed errors.",
+
+            // Flight Controls
+            "Ailerons": "Movable surfaces located on the outer trailing edge of the wings that control the aircraft's roll.",
+            "Elevator": "A horizontal control surface on the tail assembly that controls the aircraft's pitch.",
+            "Rudder": "A vertical tail surface used to control yaw and maintain coordinated flight.",
+            "Flaps": "Trailing-edge wing devices that extend downward to increase lift and drag for low-speed flight and landings.",
+            "Slats": "Leading-edge devices that extend forward to improve airflow and lift during high angles of attack.",
+            "Spoilers": "Panels on the upper wing surface designed to intentionally reduce lift and increase descent rates.",
+            "Speed Brakes": "Dedicated aerodynamic surfaces used to create pure structural drag and slow down the aircraft in flight.",
+            "Trim": "Small secondary surfaces or system adjustments used to balance control forces so the pilot doesn't have to constantly push or pull.",
+            "Yoke": "The traditional control wheel used by pilots to manage pitch and roll.",
+            "Sidestick": "A modern side-mounted joystick electronic controller used to command fly-by-wire flight systems.",
+
+            // Jet Engine Terms
+            "N1": "The low-pressure compressor fan speed, expressed as a percentage of its maximum operational RPM.",
+            "N2": "The high-pressure engine core compressor speed, monitored during engine startup sequences.",
+            "EGT": "Exhaust Gas Temperature – The temperature of combustion gases leaving the turbine, indicating engine health.",
+            "EPR": "Engine Pressure Ratio – The ratio of turbine discharge pressure to compressor inlet pressure, used to measure thrust.",
+            "Thrust Reverser": "A system that temporarily redirects engine exhaust airflow forward to help slow down the aircraft upon landing.",
+            "Bleed Air": "High-pressure compressed air pulled from the engine stages to run cabin pressurization, heating, and anti-ice systems.",
+            "Compressor Stall": "An aerodynamic disruption of airflow through the engine compressor blades, potentially causing engine backfires.",
+            "Flameout": "The accidental loss of combustion inside the engine burner cans due to bad fuel mix or extreme environmental conditions.",
+            "Spool-Up Time": "The time delay required for a jet engine to accelerate from idle RPM to full takeoff power.",
+
+            // Airline Operations
+            "Gate Hold": "A departure delay ordered by air traffic control that forces an aircraft to stay at the gate before engine start.",
+            "Pushback": "The operation where a ground tug vehicle pushes the aircraft backward away from the gate.",
+            "Turnaround": "The total time used to deplane, service, clean, refuel, load, and board an aircraft for its next flight.",
+            "Block Time": "The total duration from the moment the aircraft first moves under its own power until it parks at its destination gate.",
+            "Block Out": "The exact recorded timestamp when an aircraft releases its brakes and leaves the gate.",
+            "Block In": "The exact recorded timestamp when an aircraft sets its parking brakes at the destination terminal.",
+            "Hub Airport": "A central transit airport used by an airline to funnel connecting flights and passengers.",
+            "Focus City": "An airport that acts as a major point-to-point destination for an airline without processing massive flight connections.",
+            "Code Share": "An aviation marketing agreement where multiple airlines list the exact same flight under their own designator codes.",
+            "Load Sheet": "The final official legal document verifying the weight, fuel metrics, and passenger distribution of a flight.",
+            "Weight and Balance": "The mandatory calculations completed to verify the aircraft is within weight limits and its Center of Gravity is safe.",
+            "Operational Control": "The legal authority to initiate, change, coordinate, or terminate a flight operation.",
+            "Revenue Passenger": "A commercial passenger flying on a standard ticket who generates financial revenue for the carrier.",
+            "Non-Revenue Passenger": "Airline staff, dependents, or industry professionals traveling on discounted standby passes.",
+            "Jumpseat": "An auxiliary folding seat in the cockpit or cabin reserved for flight crews or authorized safety inspectors.",
+
+            // Instrument Approaches
+            "ILS": "Instrument Landing System – A precision radio navigation aid guiding aircraft down to the runway centerline and glidepath.",
+            "Localizer": "The component of an ILS that provides left/right horizontal guidance toward the center of the runway.",
+            "Glideslope": "The component of an ILS providing vertical guidance, typically set at a standard 3-degree angle toward the runway.",
+            "CAT I": "A basic precision approach allowing a pilot to descend to a minimum decision height of 200 feet above the ground.",
+            "CAT II": "An intermediate approach requiring special authorization to descend down to a decision height of 100 feet.",
+            "CAT III": "An advanced approach allowing autoland functionality down to the runway surface in near-zero visibility.",
+            "RNAV Approach": "Area Navigation approach utilizing satellite GPS constellations rather than conventional ground radios.",
+            "RNP Approach": "Required Navigation Performance – An advanced satellite approach requiring active onboard safety accuracy monitoring.",
+            "LPV Approach": "Localizer Performance with Vertical Guidance – A GPS approach that acts identical to an ILS precision setup.",
+            "Visual Approach": "An approach flown under ATC tracking where the pilot transitions to landing purely using eyes on the runway environment.",
+            "Missed Approach": "A safety maneuver executed when an approach cannot be safely completed to a full landing.",
+            "FAF": "Final Approach Fix – The precise point where the final descent segment of an instrument approach protocol begins.",
+
+            // Airport Lighting
+            "PAPI": "Precision Approach Path Indicator – A row of lights next to the runway displaying white or red vectors to show if you are high or low.",
+            "VASI": "Visual Approach Slope Indicator – An older stacked lighting arrangement that gives visual glidepath validation.",
+            "REIL": "Runway End Identifier Lights – A pair of high-intensity flashing white strobe lights installed at the corners of the runway threshold.",
+            "MALSR": "Medium Intensity Approach Lighting System – A long array of flashing approach lights leading directly up to the runway edge.",
+            "Centerline Lights": "In-paved guidance lights tracking down the exact center of a runway, changing colors near the end.",
+            "Touchdown Zone Lights": "Rows of white light bars embedded into the runway surface to highlight the ideal touchdown zone area.",
+            "Threshold Lights": "Green identifier lights across the start of the usable runway that appear red when approached from the opposite side.",
+            "Runway Edge Lights": "Continuous white lights outlining the lateral margins of the structural runway environment.",
+            "Taxiway Centerline Lights": "Steady green embedded fixtures providing absolute steering centerpaths down an airport taxi line.",
+            "Stop Bar Lights": "A horizontal row of red lights embedded across a taxiway that ATC deactivates to clear an aircraft onto a runway.",
+
+            // Airspace
+            "Class A Airspace": "Controlled airspace extending from 18,000 feet MSL up to Flight Level 600, requiring mandatory IFR operations.",
+            "Class B Airspace": "Highly protected airspace around the nation's busiest commercial transit terminals, shaped like an upside-down wedding cake.",
+            "Class C Airspace": "Controlled operational airspace surrounding mid-tier airports equipped with an active radar facility and control tower.",
+            "Class D Airspace": "Controlled local airspace surrounding smaller airports with an active control tower but no mandatory regional radar requirement.",
+            "Class E Airspace": "General controlled airspace handling intermediate en-route tracking between other designated airspaces.",
+            "Class G Airspace": "Uncontrolled airspace where ATC has no separation responsibility; flights operate independently.",
+            "MOA": "Military Operations Area – Airspace set aside for non-hazardous tactical training; civilian VFR traffic can cross with caution.",
+            "TFR": "Temporary Flight Restriction – A short-term ban on aviation tracking over an area due to localized hazards or VIP movements.",
+            "Restricted Area": "Airspace hiding persistent artillery, missile testing, or hazardous operations; entrance requires explicit clearance.",
+            "Prohibited Area": "Airspace where all flight tracking is completely outlawed due to permanent national security concerns.",
+            "ADIZ": "Air Defense Identification Zone – The boundary zone surrounding a nation where early identification and tracking of all aircraft is mandatory.",
+
+            // Emergencies
+            "Emergency Descent": "A rapid altitude loss maneuver executed by flight crews to escape high altitudes following structural decompression.",
+            "Ditching": "A controlled emergency landing of an aircraft onto a water surface.",
+            "Rejected Takeoff": "An aborted takeoff sequence executed on the runway roll prior to hitting the critical V1 decision speed.",
+            "Engine Failure": "The unexpected loss of thrust or mechanical catastrophic breakdown of a powerplant in flight.",
+            "Bird Strike": "An impact event between an airborne animal and any part of an aircraft structure.",
+            "Hydraulic Failure": "The loss of pressurized fluid or mechanical systems running critical flight actuators, brakes, or gear logic.",
+            "Electrical Failure": "The localized or complete failure of engine generators, forcing dependency on flight deck emergency batteries.",
+            "Fuel Emergency": "A state where an aircraft's remaining fuel reserves dictate immediate prioritisation for terminal approach.",
+            "Cabin Depressurization": "The loss of normal internal ambient air pressure within the sealed aircraft cabin structure.",
+            "Evacuation": "The rapid emergency egress of passengers from an aircraft using emergency inflatable exit slides.",
+
+            // Modern Aviation Technology
+            "ADS-B": "Automatic Dependent Surveillance-Broadcast – A system where planes calculate position via GPS and constantly broadcast it to ground tracking.",
+            "CPDLC": "Controller Pilot Data Link Communications – A modern text-based digital system allowing ATC clearway routing straight to cockpit displays.",
+            "ACARS": "Aircraft Communications Addressing and Reporting System – A data link pushing automated engine and system state logs to airline dispatchers.",
+            "EFB": "Electronic Flight Bag – An electronic device (like a pilot tablet) containing all digital aviation charts, performance calculators, and checklists.",
+            "Synthetic Vision": "A cockpit flight display layer that renders a 3D terrain map on flight monitors regardless of external bad weather.",
+            "HUD": "Head-Up Display – A transparent optical projector system displaying real-time speed, altitude, and pitch angles directly in the pilot's forward line of sight.",
+            "EVS": "Enhanced Vision System – An infrared thermal projection system allowing real-time visibility through low mist, darkness, or smoke clouds.",
+            "Autoland": "An advanced autopilot flight system that independently flies an entire approach, touchdown, flare, and brake rollout automatically.",
+            "Autothrottle": "An electronic system that continuously adjusts engine power levers to track target airspeed limits or thrust profiles.",
+
+            // Meteorology
+            "Dew Point": "The precise temperature to which air must be cooled to become completely saturated, leading to fog or condensation.",
+            "Altimeter Setting": "The localized barometric pressure value dialed into an altimeter to adjust for regional weather fluctuations.",
+            "QNH": "A barometric pressure setting that causes the altimeter to read actual altitude above mean sea level when on the ground.",
+            "QFE": "A barometric pressure setting that sets the altimeter to read exactly zero when sitting on the airfield runway surface.",
+            "QNE": "The standard en-route altimeter setting of 29.92 inHg or 1013 hPa used above transition levels globally.",
+            "Convective Activity": "Vertical atmospheric air currents causing thermal draft patterns, often resulting in sudden thunderstorms.",
+            "Cumulonimbus": "Large, vertically developed storm clouds associated with heavy lightning, extreme turbulence, and hail threats.",
+            "Virga": "Precipitation streaks falling from a high cloud deck that evaporate completely into warm air before ever reaching the ground surface.",
+            "Jet Stream": "High-altitude, fast-flowing narrow air bands that cause extreme velocity shifts or significant tracking tailwinds.",
+            "Frontal System": "The tracking boundary layer dividing two contrasting airmass types, usually generating predictable wind shifts.",
+            "Freezing Level": "The specific altitude threshold where the atmospheric temperature profile drops down past 0 degrees Celsius.",
+            "Wake Turbulence": "Dangerous wingtip vortices generated behind heavy transport aircraft that can overturn smaller trailing models.",
+
+            // Pilot Callouts
+            "V1": "The critical decision speed. Beyond this velocity point, a takeoff cannot be safely aborted, and the crew must fly.",
+            "VR": "Rotation Speed – The speed at which the pilot pulls back on the control stick to raise the aircraft nose into the air.",
+            "V2": "Takeoff Safety Speed – The minimum speed an aircraft must maintain to climb safely if an engine fails right after liftoff.",
+            "Positive Rate": "A dynamic verification callout showing the flight instruments are logging a continuous ascent vector.",
+            "Gear Up": "A cockpit action command to retract the landing gear assembly inside the aircraft frame after a confirmed climb rate.",
+            "Approaching Minimums": "An automated callout warning the pilot that the aircraft is nearing its minimum visibility decision altitude.",
+            "Minimums": "The legal altitude limit where the pilot must see the physical runway environment or execute a missed approach instantly.",
+            "Retard": "An automated callout on Airbus planes instructing the pilot to pull thrust levers to idle right before touchdown.",
+            "Spoilers Deployed": "A confirmation callout stating that the ground speed brakes have successfully deployed along the wings after wheels touch down.",
+            "80 Knots": "A cross-verification callout checking that airspeed indicators are alive and matching during the initial takeoff roll.",
+            "100 Knots": "An intermediate check timestamp callout used by specific operators to track acceleration timelines on structural frames.",
+
+            // Flight Tracking & Enthusiast Terms
+            "Tail Number": "The unique external alphanumeric sequence painted on an aircraft, functioning like a license plate.",
+            "Registration": "The official national entry record assigning an aircraft code to an operating registry file.",
+            "Hex Code": "A unique 24-bit international address assigned to an aircraft transponder unit for digital identification logs.",
+            "Callsign": "The distinct operational name designator string used during radio communications to reference a flight path.",
+            "Livery": "The exterior cosmetic paint scheme, logos, and branding graphics applied to an airline frame.",
+            "Position Report": "A structured data packet defining an aircraft's current tracking point, altitude, and estimated next fix coordinates.",
+            "Track Log": "The continuous chronological set of location telemetry logs documenting a flight's structural route mapping.",
+            "ACARS Message": "A short alphanumeric text data transmission routed over satellite paths between the airframe and line operations.",
+            "Dispatch Route": "The official pre-planned navigation string generated by airline personnel to balance fuel and safety limits.",
+            "Route String": "The standardized sequence of airways, navigation fixes, and airport codes describing a specific flight path.",
+            "Oceanic Clearance": "Special procedural authorization required to track across remote oceans outside traditional radar coverage zones.",
+            "Slot Time": "A strict arrival or departure window assigned to an aircraft to regulate flows at congested tracking hubs.",
+
+            // Advanced Aerodynamics & Design
+            "Aspect Ratio": "The ratio of a wing's span to its mean chord. High aspect ratio wings (like gliders) are long and skinny, providing high lift and efficiency at low speeds.",
+            "Induced Drag": "Drag created as a byproduct of producing lift, primarily caused by wingtip vortices. It decreases as airspeed increases.",
+            "Parasite Drag": "Drag caused by the aircraft's shape, skin friction, and structural components moving through the air. It increases exponentially as airspeed increases.",
+            "Ground Effect": "The temporary gain in lift and reduction in aerodynamic drag that occurs when an aircraft flies within one wingspan distance of the surface.",
+            "Mach Tuck": "An aerodynamic hazard where the center of pressure moves rearward at high Mach speeds, causing the aircraft's nose to pitch downward automatically.",
+            "Dutch Roll": "An unstable aerodynamic wave cycle combining continuous rolling and yawing motions, usually corrected automatically by a yaw damper system.",
+
+            // Advanced Navigation & Tracking
+            "GNSS": "Global Navigation Satellite System – A generic term for all satellite navigation constellations, including US GPS, European Galileo, and Russian GLONASS.",
+            "VHF Omnidirectional Range": "VOR – A ground-based electronic navigation station that broadcasts radio signals enabling an aircraft to determine its exact bearing from the station.",
+            "DME": "Distance Measuring Equipment – A transponder system used to measure the slant-range distance between an aircraft and a ground tracking station.",
+            "Waypoints": "Specific geographical coordinates defined by latitude and longitude, used to build digital airway routing patterns inside a flight computer.",
+            "Inertial Reference System": "IRS – A completely self-contained navigation system that uses gyroscopes and accelerometers to track an aircraft's position without external radio signals.",
+
+            // Human Factors & Crew Management
+            "CRM": "Crew Resource Management – A system of operational training designed to optimize communication, teamwork, and decision-making within a flight deck crew.",
+            "Hypoxia": "A medical condition caused by a lack of oxygen in the body's tissues, frequently triggered by high-altitude cabin decompression.",
+            "Spatial Disorientation": "A hazardous condition where a pilot's sensory perceptions disagree with the physical reality of the aircraft's flight attitude.",
+            "Sterile Cockpit Rule": "A strict safety regulation banning all non-essential conversation and tasks below 10,000 feet to maximize crew focus.",
+
+            // Structural Components
+            "Fuselage": "The central structural body section of an aircraft designed to hold passengers, crew, and cargo storage frames.",
+            "Empennage": "The entire tail assembly structure of an aircraft, including the vertical stabilizer, horizontal stabilizer, rudder, and elevators.",
+            "Monocoque": "A structural design approach where the outer skin shell carries all or most of the primary structural flight loads.",
+            "Nacelle": "The specialized protective aerodynamic housing or casing wrapped around an aircraft's engine assembly.",
+            "Winglet": "An angled vertical extension attached to a wingtip designed to reduce wingtip vortices and decrease induced drag.",
+
+            // Systems & Diagnostics
+            "FADEC": "Full Authority Digital Engine Control – A high-precision computer system that monitors and controls all aspects of aircraft engine performance automatically.",
+            "APU": "Auxiliary Power Unit – A small interior jet engine located in the aircraft tailcone that provides electrical power and bleed air while the main engines are shut down.",
+            "RAT": "Ram Air Turbine – An emergency deployable propeller that drops into the airstream beneath the fuselage to generate basic hydraulic or electrical power if main engine power fails.",
+            "GCU": "Generator Control Unit – An electronic protection component that regulates the voltage output and safety limits of the aircraft's electrical generators.",
+            "PTU": "Power Transfer Unit – A bidirectional hydraulic component that allows one aircraft hydraulic system to pressurize an alternate system using mechanical fluid pressure without transferring actual fluid.",
+            "PACK": "Pneumatic Air Conditioning Kit – The environmental control units that condition high-temperature bleed air from the engines into pressurized air for the cabin.",
+
+            // Specialized Aerodynamics
+            "Stall": "A sudden reduction in lift generated by an airfoil, occurring when the angle of attack increases past a critical limit and smooth airflow separates from the upper wing surface.",
+            "Angle of Attack": "AOA – The angle between the chord line of an aircraft's wing and the relative wind direction vector.",
+            "Vortices": "High-velocity rotating spirals of air trailing behind a wingtip, caused by high-pressure air beneath the wing escaping around the tip into the lower pressure zone above.",
+            "Dihedral": "The upward angle of an aircraft's wings relative to the horizontal plane, engineered to provide lateral aerodynamic roll stability.",
+            "Anhedral": "The downward sloping angle of an aircraft's wings relative to the horizontal axis, commonly used on high-wing cargo planes to increase rolling maneuverability.",
+            "Mach Buffet": "The distinct structural vibration or shaking caused by local supersonic airflow separation over an aircraft's wings as it approaches its critical Mach speed.",
+            "Boundary Layer": "The thin layer of air immediately adjacent to the structural surface of an airfoil where friction slows down local airflow velocity.",
+
+            // Air Traffic Control & Separation
+            "TCAS": "Traffic Collision Avoidance System – An airborne system that interrogates transponders on nearby planes and instructs flight crews to climb or descend if a mid-air collision threat is calculated.",
+            "RA": "Resolution Advisory – A time-critical vertical maneuver instruction generated by TCAS commanding the pilot to climb or descend to avoid an aircraft target.",
+            "TA": "Traffic Advisory – A precautionary alert generated by TCAS notifying the pilot of nearby airborne traffic without prescribing an immediate evasive action maneuver.",
+            "RVSM": "Reduced Vertical Separation Minimum – Aviation protocol that drops mandatory vertical separation between flights from 2,000 feet down to 1,000 feet within Flight Levels 290 and 410, requiring special instruments.",
+            "Squawk": "A four-digit octal code dialed into an aircraft transponder system by the flight crew to identify the flight on air traffic control radar screens.",
+            "Ident": "A transponder setting that causes the aircraft's target on an air traffic controller's radar screen to flash brightly for easy visual identification.",
+
+            // Weather & Hazards
+            "Microburst": "An intense, highly localized downdraft of air that descends out of a thunderstorm and creates severe wind shear hazards near the ground.",
+            "Wind Shear": "A sudden, drastic change in wind velocity or direction over a short distance, capable of abruptly altering an aircraft's airspeed and lift.",
+            "CAT": "Clear Air Turbulence – Sudden, severe atmospheric turbulence occurring in cloud-free air at high altitudes, usually triggered by jet stream boundary shifts.",
+            "METAR": "A standardized text-formatted routine weather report issued hourly for specific airport terminals, detailing wind, visibility, cloud layers, and pressure.",
+            "TAF": "Terminal Aerodrome Forecast – A structured text forecast describing expected meteorological conditions at a specific airport over a 24-hour or 30-hour period.",
+            "SIGMET": "Significant Meteorological Information – An urgent weather advisory warning all aircraft of severe, hazardous weather phenomena like volcanic ash, icing, or severe turbulence.",
+
+            // Flight Deck & Navigation Systems
+            "FMS": "Flight Management System – A centralized computer system that integrates navigation data, performance inputs, and flight tracking lines to automate en-route steering.",
+            "MCP": "Mode Control Panel – The primary panel located on the cockpit glare shield where pilots select autoflight parameters like target altitude, heading, and airspeed.",
+            "CDU": "Control Display Unit – The text interface keyboard and screen component used by flight crews to input and modify flight paths inside the FMS.",
+            "PFD": "Primary Flight Display – A high-visibility electronic display tracking essential flight metrics like airspeed, altitude, attitude, heading, and vertical speed.",
+            "ND": "Navigation Display – A flat-panel screen displaying the horizontal flight path line, active waypoints, weather radar layers, and nearby tracking stations.",
+            "EICAS": "Engine Indication and Crew Alerting System – A centralized monitoring screen displaying engine instruments, fuel tracking, and system alert text lines.",
+
+            // Regulations & Operational Margins
+            "ETOPS": "Extended-range Twin-engine Operational Performance Standards – Special regulations governing how far twin-engine airliners can fly from an alternate diversion airport over oceans or remote land.",
+            "Vmo": "Maximum Operating Limit Speed – The absolute maximum structural speed an aircraft can sustain safely across lower flight environments.",
+            "Mmo": "Maximum Operating Mach Number – The absolute maximum speed limit an aircraft can sustain safely relative to the local speed of sound at high altitudes.",
+            "Vne": "Never Exceed Speed – The critical maximum velocity limit for structural safety, usually designated on general aviation indicators with a distinct red line.",
+            "MEL": "Minimum Equipment List – A legally approved tracking index detailing specific instruments or components that can be inoperative while still allowing a flight to legally depart.",
+            "CDL": "Configuration Deviation List – An official legal reference document detailing structural aircraft parts (such as aerodynamic fairings) that can be missing before departure without grounding the flight."
+        };
+
+        function showDefinition() {
+            let selectedTerm = document.getElementById("aviationTerm").value;
+            let displayBox = document.getElementById("definitionDisplay");
+
+            // Check baseline selection criteria
+            if (selectedTerm === "") {
+                displayBox.innerHTML = "<i style='color: #777;'>Selected terminology definitions will render here.</i>";
+                return;
+            }
+
+            // Direct O(1) data abstraction lookup
+            let outputText = definitions[selectedTerm];
+
+            displayBox.innerHTML = `
+                <strong style="display: block; margin-bottom: 5px; color: #222;">${selectedTerm}</strong>
+                <span>${outputText}</span>
+            `;
+        }
+    </script>
+</head>
+<div class="dropdown-group" style="margin-bottom: 20px;">
+            <label for="aviationTerm" style="display: block; font-weight: bold; margin-bottom: 8px;">
+                Select an Aviation Term:
+            </label>
+            <select id="aviationTerm" onchange="showDefinition()" style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #aaa; border-radius: 4px; background: #fff;">
+                <option value="">-- Choose a Term --</option>
+
+                <optgroup label="Airspeed & Altitude">
+                    <option value="IAS">IAS (Indicated Airspeed)</option>
+                    <option value="CAS">CAS (Calibrated Airspeed)</option>
+                    <option value="EAS">EAS (Equivalent Airspeed)</option>
+                    <option value="TAS">TAS (True Airspeed)</option>
+                    <option value="GS">GS (Ground Speed)</option>
+                    <option value="Mach Number">Mach Number</option>
+                    <option value="Pressure Altitude">Pressure Altitude</option>
+                    <option value="True Altitude">True Altitude</option>
+                    <option value="AGL">AGL (Above Ground Level)</option>
+                    <option value="MSL">MSL (Mean Sea Level)</option>
+                    <option value="Flight Envelope">Flight Envelope</option>
+                    <option value="Coffin Corner">Coffin Corner</option>
+                </optgroup>
+
+                <optgroup label="Flight Controls">
+                    <option value="Ailerons">Ailerons</option>
+                    <option value="Elevator">Elevator</option>
+                    <option value="Rudder">Rudder</option>
+                    <option value="Flaps">Flaps</option>
+                    <option value="Slats">Slats</option>
+                    <option value="Spoilers">Spoilers</option>
+                    <option value="Speed Brakes">Speed Brakes</option>
+                    <option value="Trim">Trim</option>
+                    <option value="Yoke">Yoke</option>
+                    <option value="Sidestick">Sidestick</option>
+                </optgroup>
+
+                <optgroup label="Jet Engine Terms">
+                    <option value="N1">N1</option>
+                    <option value="N2">N2</option>
+                    <option value="EGT">EGT</option>
+                    <option value="EPR">EPR</option>
+                    <option value="Thrust Reverser">Thrust Reverser</option>
+                    <option value="Bleed Air">Bleed Air</option>
+                    <option value="Compressor Stall">Compressor Stall</option>
+                    <option value="Flameout">Flameout</option>
+                    <option value="Spool-Up Time">Spool-Up Time</option>
+                </optgroup>
+
+                <optgroup label="Airline Operations">
+                    <option value="Gate Hold">Gate Hold</option>
+                    <option value="Pushback">Pushback</option>
+                    <option value="Turnaround">Turnaround</option>
+                    <option value="Block Time">Block Time</option>
+                    <option value="Block Out">Block Out</option>
+                    <option value="Block In">Block In</option>
+                    <option value="Hub Airport">Hub Airport</option>
+                    <option value="Focus City">Focus City</option>
+                    <option value="Code Share">Code Share</option>
+                    <option value="Load Sheet">Load Sheet</option>
+                    <option value="Weight and Balance">Weight and Balance</option>
+                    <option value="Operational Control">Operational Control</option>
+                    <option value="Revenue Passenger">Revenue Passenger</option>
+                    <option value="Non-Revenue Passenger">Non-Revenue Passenger</option>
+                    <option value="Jumpseat">Jumpseat</option>
+                </optgroup>
+
+                <optgroup label="Instrument Approaches">
+                    <option value="ILS">ILS</option>
+                    <option value="Localizer">Localizer</option>
+                    <option value="Glideslope">Glideslope</option>
+                    <option value="CAT I">CAT I</option>
+                    <option value="CAT II">CAT II</option>
+                    <option value="CAT III">CAT III</option>
+                    <option value="RNAV Approach">RNAV Approach</option>
+                    <option value="RNP Approach">RNP Approach</option>
+                    <option value="LPV Approach">LPV Approach</option>
+                    <option value="Visual Approach">Visual Approach</option>
+                    <option value="Missed Approach">Missed Approach</option>
+                    <option value="FAF">FAF (Final Approach Fix)</option>
+                </optgroup>
+
+                <optgroup label="Airport Lighting">
+                    <option value="PAPI">PAPI</option>
+                    <option value="VASI">VASI</option>
+                    <option value="REIL">REIL</option>
+                    <option value="MALSR">MALSR</option>
+                    <option value="Centerline Lights">Centerline Lights</option>
+                    <option value="Touchdown Zone Lights">Touchdown Zone Lights</option>
+                    <option value="Threshold Lights">Threshold Lights</option>
+                    <option value="Runway Edge Lights">Runway Edge Lights</option>
+                    <option value="Taxiway Centerline Lights">Taxiway Centerline Lights</option>
+                    <option value="Stop Bar Lights">Stop Bar Lights</option>
+                </optgroup>
+
+                <optgroup label="Airspace">
+                    <option value="Class A Airspace">Class A Airspace</option>
+                    <option value="Class B Airspace">Class B Airspace</option>
+                    <option value="Class C Airspace">Class C Airspace</option>
+                    <option value="Class D Airspace">Class D Airspace</option>
+                    <option value="Class E Airspace">Class E Airspace</option>
+                    <option value="Class G Airspace">Class G Airspace</option>
+                    <option value="MOA">MOA</option>
+                    <option value="TFR">TFR</option>
+                    <option value="Restricted Area">Restricted Area</option>
+                    <option value="Prohibited Area">Prohibited Area</option>
+                    <option value="ADIZ">ADIZ</option>
+                </optgroup>
+
+                <optgroup label="Emergencies">
+                    <option value="Emergency Descent">Emergency Descent</option>
+                    <option value="Ditching">Ditching</option>
+                    <option value="Rejected Takeoff">Rejected Takeoff (RTO)</option>
+                    <option value="Engine Failure">Engine Failure</option>
+                    <option value="Bird Strike">Bird Strike</option>
+                    <option value="Hydraulic Failure">Hydraulic Failure</option>
+                    <option value="Electrical Failure">Electrical Failure</option>
+                    <option value="Fuel Emergency">Fuel Emergency</option>
+                    <option value="Cabin Depressurization">Cabin Depressurization</option>
+                    <option value="Evacuation">Evacuation</option>
+                </optgroup>
+
+                <optgroup label="Modern Aviation Technology">
+                    <option value="ADS-B">ADS-B</option>
+                    <option value="CPDLC">CPDLC</option>
+                    <option value="ACARS">ACARS</option>
+                    <option value="EFB">Electronic Flight Bag (EFB)</option>
+                    <option value="Synthetic Vision">Synthetic Vision</option>
+                    <option value="HUD">Head-Up Display (HUD)</option>
+                    <option value="EVS">Enhanced Vision System (EVS)</option>
+                    <option value="Autoland">Autoland</option>
+                    <option value="Autothrottle">Autothrottle</option>
+                </optgroup>
+
+                <optgroup label="Meteorology">
+                    <option value="Dew Point">Dew Point</option>
+                    <option value="Altimeter Setting">Altimeter Setting</option>
+                    <option value="QNH">QNH</option>
+                    <option value="QFE">QFE</option>
+                    <option value="QNE">QNE</option>
+                    <option value="Convective Activity">Convective Activity</option>
+                    <option value="Cumulonimbus">Cumulonimbus (CB)</option>
+                    <option value="Virga">Virga</option>
+                    <option value="Jet Stream">Jet Stream</option>
+                    <option value="Frontal System">Frontal System</option>
+                    <option value="Freezing Level">Freezing Level</option>
+                    <option value="Wake Turbulence">Wake Turbulence</option>
+                </optgroup>
+
+                <optgroup label="Pilot Callouts">
+                    <option value="V1">V1</option>
+                    <option value="VR">VR</option>
+                    <option value="V2">V2</option>
+                    <option value="Positive Rate">Positive Rate</option>
+                    <option value="Gear Up">Gear Up</option>
+                    <option value="Approaching Minimums">Approaching Minimums</option>
+                    <option value="Minimums">Minimums</option>
+                    <option value="Retard">Retard</option>
+                    <option value="Spoilers Deployed">Spoilers Deployed</option>
+                    <option value="80 Knots">80 Knots</option>
+                    <option value="100 Knots">100 Knots</option>
+                </optgroup>
+
+                <optgroup label="Flight Tracking & Enthusiast Terms">
+                    <option value="Tail Number">Tail Number</option>
+                    <option value="Registration">Registration</option>
+                    <option value="Hex Code">Hex Code</option>
+                    <option value="Callsign">Callsign</option>
+                    <option value="Livery">Livery</option>
+                    <option value="Position Report">Position Report</option>
+                    <option value="Track Log">Track Log</option>
+                    <option value="ACARS Message">ACARS Message</option>
+                    <option value="Dispatch Route">Dispatch Route</option>
+                    <option value="Route String">Route String</option>
+                    <option value="Oceanic Clearance">Oceanic Clearance</option>
+                    <option value="Slot Time">Slot Time</option>
+                </optgroup>
+
+                <optgroup label="Advanced Aerodynamics & Design">
+                    <option value="Aspect Ratio">Aspect Ratio</option>
+                    <option value="Induced Drag">Induced Drag</option>
+                    <option value="Parasite Drag">Parasite Drag</option>
+                    <option value="Ground Effect">Ground Effect</option>
+                    <option value="Mach Tuck">Mach Tuck</option>
+                    <option value="Dutch Roll">Dutch Roll</option>
+                </optgroup>
+
+                <optgroup label="Advanced Navigation & Tracking">
+                    <option value="GNSS">GNSS</option>
+                    <option value="VHF Omnidirectional Range">VOR (VHF Omnidirectional Range)</option>
+                    <option value="DME">DME (Distance Measuring Equipment)</option>
+                    <option value="Waypoints">Waypoints</option>
+                    <option value="Inertial Reference System">IRS (Inertial Reference System)</option>
+                </optgroup>
+
+                <optgroup label="Human Factors & Crew Management">
+                    <option value="CRM">CRM (Crew Resource Management)</option>
+                    <option value="Hypoxia">Hypoxia</option>
+                    <option value="Spatial Disorientation">Spatial Disorientation</option>
+                    <option value="Sterile Cockpit Rule">Sterile Cockpit Rule</option>
+                </optgroup>
+
+                <optgroup label="Structural Components">
+                    <option value="Fuselage">Fuselage</option>
+                    <option value="Empennage">Empennage</option>
+                    <option value="Monocoque">Monocoque</option>
+                    <option value="Nacelle">Nacelle</option>
+                    <option value="Winglet">Winglet</option>
+                </optgroup>
+
+                <optgroup label="Systems & Diagnostics">
+                    <option value="FADEC">FADEC</option>
+                    <option value="APU">APU (Auxiliary Power Unit)</option>
+                    <option value="RAT">RAT (Ram Air Turbine)</option>
+                    <option value="GCU">GCU (Generator Control Unit)</option>
+                    <option value="PTU">PTU (Power Transfer Unit)</option>
+                    <option value="PACK">PACK (Air Conditioning Kit)</option>
+                </optgroup>
+
+                <optgroup label="Specialized Aerodynamics">
+                    <option value="Stall">Stall</option>
+                    <option value="Angle of Attack">Angle of Attack (AOA)</option>
+                    <option value="Vortices">Vortices</option>
+                    <option value="Dihedral">Dihedral</option>
+                    <option value="Anhedral">Anhedral</option>
+                    <option value="Mach Buffet">Mach Buffet</option>
+                    <option value="Boundary Layer">Boundary Layer</option>
+                </optgroup>
+
+                <optgroup label="ATC & Separation">
+                    <option value="TCAS">TCAS</option>
+                    <option value="RA">RA (Resolution Advisory)</option>
+                    <option value="TA">TA (Traffic Advisory)</option>
+                    <option value="RVSM">RVSM Separation</option>
+                    <option value="Squawk">Squawk Code</option>
+                    <option value="Ident">Ident Function</option>
+                </optgroup>
+
+                <optgroup label="Weather & Hazards">
+                    <option value="Microburst">Microburst</option>
+                    <option value="Wind Shear">Wind Shear</option>
+                    <option value="CAT">CAT (Clear Air Turbulence)</option>
+                    <option value="METAR">METAR Report</option>
+                    <option value="TAF">TAF Forecast</option>
+                    <option value="SIGMET">SIGMET Advisory</option>
+                </optgroup>
+
+                <optgroup label="Flight Deck & Avionics">
+                    <option value="FMS">FMS (Flight Management System)</option>
+                    <option value="MCP">MCP (Mode Control Panel)</option>
+                    <option value="CDU">CDU (Control Display Unit)</option>
+                    <option value="PFD">PFD (Primary Flight Display)</option>
+                    <option value="ND">ND (Navigation Display)</option>
+                    <option value="EICAS">EICAS Screen</option>
+                </optgroup>
+
+                <optgroup label="Regulations & Margins">
+                    <option value="ETOPS">ETOPS Limits</option>
+                    <option value="Vmo">Vmo Limit Speed</option>
+                    <option value="Mmo">Mmo Limit Mach</option>
+                    <option value="Vne">Vne Never Exceed</option>
+                    <option value="MEL">MEL List</option>
+                    <option value="CDL">CDL List</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div id="definitionDisplay" style="padding: 15px; border-radius: 4px; background-color: #f9f9f9; min-height: 80px; border: 1px dashed #bbb; font-size: 14px; line-height: 1.5; color: #333;">
+            <i style="color: #777;">Selected terminology definitions will render here.</i>
+        </div>
+
+</body>
+</html>
